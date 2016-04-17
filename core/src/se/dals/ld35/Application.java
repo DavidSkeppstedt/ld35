@@ -1,6 +1,7 @@
 package se.dals.ld35;
 
 import com.badlogic.gdx.Game;
+import se.dals.ld35.helper.Assets;
 import se.dals.ld35.screens.GameScreen;
 
 /**
@@ -10,7 +11,7 @@ public class Application extends Game {
 
     @Override
     public void create() {
-        setScreen(new GameScreen(this));
+        setScreen(new GameScreen(this,new Assets()));
     }
 
 

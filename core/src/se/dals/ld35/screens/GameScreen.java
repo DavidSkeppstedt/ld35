@@ -16,6 +16,7 @@ import se.dals.ld35.components.PositionComponent;
 import se.dals.ld35.components.SizeComponent;
 import se.dals.ld35.components.VisualComponent;
 import se.dals.ld35.entities.WorldBuilder;
+import se.dals.ld35.helper.Assets;
 import se.dals.ld35.helper.LevelParser;
 import se.dals.ld35.systems.DebugRenderSystem;
 import se.dals.ld35.systems.RenderSystem;
@@ -26,11 +27,13 @@ import se.dals.ld35.systems.RenderSystem;
 public class GameScreen implements Screen {
 
     private Game game;
+    private Assets assets;
     private PooledEngine engine;
     private OrthographicCamera cam;
     private Viewport viewport;
 
-    public GameScreen(Game game) {
+    public GameScreen(Game game,Assets assets) {
+        this.assets = assets;
         this.game = game;
         this.engine = new PooledEngine();
         this.cam = new OrthographicCamera();
