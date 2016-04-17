@@ -1,20 +1,14 @@
 package se.dals.ld35.screens;
 
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import se.dals.ld35.components.PositionComponent;
-import se.dals.ld35.components.SizeComponent;
-import se.dals.ld35.components.VisualComponent;
 import se.dals.ld35.entities.WorldBuilder;
 import se.dals.ld35.helper.Assets;
 import se.dals.ld35.helper.LevelParser;
@@ -49,8 +43,8 @@ public class GameScreen implements Screen {
         engine.addSystem(new DebugRenderSystem(cam));
 
         //Adding entities...
-        LevelParser parser = new LevelParser("map.png");
-        WorldBuilder.BuildWorld(this.engine,parser.parse(),"tile_config.json");
+        LevelParser parser = new LevelParser(assets.manager.get(Assets.MAP,Pixmap.class));
+        WorldBuilder.BuildWorld(this.engine,parser.parse(),assets);
     }
 
     @Override
@@ -61,7 +55,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor( 0, 0, 0, 1 );
+        Gdx.gl.glClearColor( 100/255f, 238/255f, 238/255f, 1 );
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
 
         engine.update(Gdx.graphics.getDeltaTime());

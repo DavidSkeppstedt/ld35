@@ -8,9 +8,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  * Created by david on 2016-04-16.
  */
 public class VisualComponent implements Component {
-    public Texture texture;
+    public TextureRegion region;
 
-    public VisualComponent(Texture texture) {
-        this.texture = texture;
+    public VisualComponent(TextureRegion texture) {
+        this.region = texture;
     }
 }

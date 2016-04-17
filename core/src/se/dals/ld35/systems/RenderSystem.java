@@ -51,7 +51,7 @@ public class RenderSystem extends EntitySystem {
             size = Mapper.SIZE.get(e);
 
             batch.draw(
-                    sprite.texture,
+                    sprite.region,
                     position.X(),
                     position.Y(),
                     size.width,
