@@ -7,57 +7,45 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import se.dals.ld35.Mapper;
 import se.dals.ld35.components.PositionComponent;
 import se.dals.ld35.components.SizeComponent;
-import se.dals.ld35.components.VisualComponent;
 
 /**
- * Created by david on 2016-04-16.
+ * Created by david on 2016-04-17.
  */
-public class RenderSystem extends EntitySystem {
-    private ImmutableArray<Entity> entities;
+public class DebugRenderSystem extends EntitySystem {
 
-    private SpriteBatch batch;
+
+    private ShapeRenderer shape;
+    private ImmutableArray<Entity> entities;
     private OrthographicCamera camera;
 
-    public RenderSystem(OrthographicCamera camera) {
+    public DebugRenderSystem(OrthographicCamera camera) {
         this.camera = camera;
-        this.batch = new SpriteBatch();
+        shape = new ShapeRenderer();
     }
 
     @Override
     public void addedToEngine(Engine engine) {
-        entities = engine.getEntitiesFor(Family.all(VisualComponent.class,PositionComponent.class,SizeComponent.class).get());
+        entities = engine.getEntitiesFor(Family.all(PositionComponent.class,SizeComponent.class).get());
     }
 
     @Override
     public void update(float deltaTime) {
         PositionComponent position;
-        VisualComponent sprite;
         SizeComponent size;
 
-        camera.update();
-        batch.setProjectionMatrix(camera.combined);
-        batch.begin();
-
+        shape.begin(ShapeRenderer.ShapeType.Line);
+        shape.setProjectionMatrix(camera.combined);
         for (int i = 0; i < entities.size(); i++) {
             Entity e = entities.get(i);
-
-            sprite = Mapper.VISUAL.get(e);
             position = Mapper.POSITION.get(e);
             size = Mapper.SIZE.get(e);
-
-            batch.draw(
-                    sprite.texture,
-                    position.X(),
-                    position.Y(),
-                    size.width,
-                    size.height);
+            shape.setColor(Color.BLUE);
+            shape.rect(position.X(), position.Y(), size.width, size.height);
         }
-
-        batch.end();
+        shape.end();
     }
 }
