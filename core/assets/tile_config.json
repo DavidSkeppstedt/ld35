@@ -1,0 +1,10 @@
+{
+  "tiles":[
+    {"name":"Air","color":"0xEA2206FF","id":0},
+    {"name":"GroundTop","color":"0xF250C6FF","id":1,"image":"tileBrown","index":4},
+    {"name":"GroundRight","color":"0x0000FFFF","id":2,"image":"tileBrown","index":3},
+    {"name":"GroundLeft","color":"0x00FF00FF","id":3,"image":"tileBrown","index":1},
+    {"name":"Ground","color":"0xFFF300FF","id":4,"image":"tileBrown","index":2},
+    {"name":"Dirt","color":"0xFF8B00FF","id":5,"image":"tileBrown","index":27}
+  ]
+}
