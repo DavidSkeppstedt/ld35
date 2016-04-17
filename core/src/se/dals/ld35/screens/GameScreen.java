@@ -15,6 +15,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import se.dals.ld35.components.PositionComponent;
 import se.dals.ld35.components.SizeComponent;
 import se.dals.ld35.components.VisualComponent;
+import se.dals.ld35.entities.WorldBuilder;
+import se.dals.ld35.helper.LevelParser;
+import se.dals.ld35.systems.DebugRenderSystem;
 import se.dals.ld35.systems.RenderSystem;
 
 /**
@@ -36,20 +39,15 @@ public class GameScreen implements Screen {
         this.cam.position.set(cam.viewportWidth/2,cam.viewportHeight/2,0);
         this.cam.update();
 
-
+        //Game systems..
         engine.addSystem(new RenderSystem(cam));
 
+        //Debug systems.
+        engine.addSystem(new DebugRenderSystem(cam));
 
-        Texture block = new Texture("block.png");
-
-
-        Entity e = engine.createEntity();
-        e.add(new PositionComponent());
-        e.add(new VisualComponent(block));
-        e.add(new SizeComponent(1,1));
-
-
-        engine.addEntity(e);
+        //Adding entities...
+        LevelParser parser = new LevelParser("map.png");
+        WorldBuilder.BuildWorld(this.engine,parser.parse(),"tile_config.json");
     }
 
     @Override
